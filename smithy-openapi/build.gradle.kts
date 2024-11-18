@@ -13,6 +13,11 @@
  * permissions and limitations under the License.
  */
 
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
+
 description = "This module contains support for converting a Smithy model to OpenAPI."
 
 extra["displayName"] = "Smithy :: OpenAPI Conversion"

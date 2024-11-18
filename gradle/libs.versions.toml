@@ -1,0 +1,17 @@
+[versions]
+junit5 = "5.10.0"
+hamcrest = "2.1"
+apiguardian = "1.1.2"
+spotbugs = "6.0.22"
+spotless = "6.25.0"
+dep-analysis = "2.4.2"
+
+[libraries]
+junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit5" }
+junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", version.ref = "junit5" }
+junit-jupiter-params = { module = "org.junit.jupiter:junit-jupiter-params", version.ref = "junit5" }
+hamcrest = { module = "org.hamcrest:hamcrest", version.ref = "hamcrest" }
+apiguardian = { module = "org.apiguardian:apiguardian-api", version.ref = "apiguardian"}
+spotbugs = { module = "com.github.spotbugs.snom:spotbugs-gradle-plugin", version.ref = "spotbugs" }
+spotless = { module = "com.diffplug.spotless:spotless-plugin-gradle", version.ref = "spotless" }
+dependency-analysis = { module = "com.autonomousapps:dependency-analysis-gradle-plugin", version.ref = "dep-analysis" }

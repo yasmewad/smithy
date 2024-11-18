@@ -5,6 +5,8 @@
 
 plugins {
     id("software.amazon.smithy.gradle.smithy-jar")
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
 }
 
 description = "Defines protocol tests for Smithy HTTP protocols."
@@ -13,13 +15,13 @@ extra["displayName"] = "Smithy :: Protocol Tests"
 extra["moduleName"] = "software.amazon.smithy.protocoltests"
 
 dependencies {
-    implementation(project(path= ":smithy-cli", configuration= "shadow"))
+    implementation(project(path = ":smithy-cli", configuration = "shadow"))
     implementation(project(":smithy-protocol-test-traits"))
     implementation(project(":smithy-protocol-traits"))
     api(project(":smithy-validation-model"))
 }
 
-tasks{
+tasks {
     sourcesJar {
         dependsOn("smithyJarStaging")
     }

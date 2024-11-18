@@ -12,16 +12,17 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+plugins {
+    id("me.champeau.jmh")
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 
 description = "This module provides the core implementation of loading, validating, " +
-        "traversing, mutating, and serializing a Smithy model."
+    "traversing, mutating, and serializing a Smithy model."
 
 extra["displayName"] = "Smithy :: Model"
 extra["moduleName"] = "software.amazon.smithy.model"
-
-plugins {
-    id("me.champeau.jmh")
-}
 
 dependencies {
     api(project(":smithy-utils"))

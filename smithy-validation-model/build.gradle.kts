@@ -15,6 +15,8 @@
 
 plugins {
     id("software.amazon.smithy.gradle.smithy-jar")
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
 }
 
 description = "This module provides support for validation in Smithy server SDKs"

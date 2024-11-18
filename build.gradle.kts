@@ -23,7 +23,6 @@ plugins {
     signing
     checkstyle
     jacoco
-    id("com.github.spotbugs") version "6.0.8"
     id("io.codearte.nexus-staging") version "0.30.0"
     id("me.champeau.jmh") version "0.7.2"
     id("com.github.johnrengelman.shadow") version "7.1.2"
@@ -35,18 +34,12 @@ val libraryVersion = project.file("VERSION").readText().trim()
 
 println("Smithy version: '$libraryVersion'")
 
-allprojects {
-    group = "software.amazon.smithy"
-    version = libraryVersion
-}
-
 // JReleaser publishes artifacts from a local staging repository, rather than maven local.
 // https://jreleaser.org/guide/latest/examples/maven/staging-artifacts.html#_gradle
 val stagingDirectory = rootProject.layout.buildDirectory.dir("staging")
 
 subprojects {
     apply(plugin = "java-library")
-
     java {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
@@ -55,14 +48,6 @@ subprojects {
     repositories {
         mavenLocal()
         mavenCentral()
-    }
-
-    dependencies {
-        testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
-        testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
-        testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
-        testImplementation("org.hamcrest:hamcrest:2.1")
-        testCompileOnly("org.apiguardian:apiguardian-api:1.1.2")
     }
 
     // Reusable license copySpec for building JARs
@@ -98,23 +83,6 @@ subprojects {
 
     // Always run javadoc after build.
     tasks["build"].dependsOn(tasks["javadoc"])
-
-    // ==== Tests ====
-    // https://docs.gradle.org/current/samples/sample_java_multi_project_with_junit5_tests.html
-    tasks.test {
-        useJUnitPlatform()
-    }
-
-    // Log on passed, skipped, and failed test events if the `-Plog-tests` property is set.
-    // https://docs.gradle.org/current/javadoc/org/gradle/api/tasks/testing/logging/TestLoggingContainer.html
-    if (project.hasProperty("log-tests")) {
-        tasks.test {
-            testLogging {
-                events("passed", "skipped", "failed")
-                exceptionFormat = TestExceptionFormat.FULL
-            }
-        }
-    }
 
     // ==== Maven ====
     apply(plugin = "maven-publish")
@@ -204,12 +172,12 @@ subprojects {
         finalizedBy("copyMavenMetadataForDevelopment")
     }
 
-    // ==== CheckStyle ====
-    // https://docs.gradle.org/current/userguide/checkstyle_plugin.html
-    apply(plugin = "checkstyle")
-    tasks.named("checkstyleTest") {
-        enabled = false
-    }
+    // // ==== CheckStyle ====
+    // // https://docs.gradle.org/current/userguide/checkstyle_plugin.html
+    // apply(plugin = "checkstyle")
+    // tasks.named("checkstyleTest") {
+    //     enabled = false
+    // }
 
     // ==== Code coverage ====
     // https://docs.gradle.org/current/userguide/jacoco_plugin.html
@@ -230,18 +198,18 @@ subprojects {
         }
     }
 
-    // ==== Spotbugs ====
-    // https://plugins.gradle.org/plugin/com.github.spotbugs
-    apply(plugin = "com.github.spotbugs")
-    // We don't need to lint tests.
-    tasks.named("spotbugsTest") {
-        enabled = false
-    }
-    // Configure the bug filter for spotbugs.
-    spotbugs {
-        effort.set(Effort.MAX)
-        excludeFilter.set(file("${project.rootDir}/config/spotbugs/filter.xml"))
-    }
+//    // ==== Spotbugs ====
+//    // https://plugins.gradle.org/plugin/com.github.spotbugs
+//    apply(plugin = "com.github.spotbugs")
+//    // We don't need to lint tests.
+//    tasks.named("spotbugsTest") {
+//        enabled = false
+//    }
+//    // Configure the bug filter for spotbugs.
+//    spotbugs {
+//        effort.set(Effort.MAX)
+//        excludeFilter.set(file("${project.rootDir}/config/spotbugs/filter.xml"))
+//    }
 }
 
 // The root project doesn't produce a JAR.
@@ -263,6 +231,9 @@ afterEvaluate {
 // Disable HTML doclint to work around heading tag sequence validation
 // inconsistencies between JDK15 and earlier Java versions.
 allprojects {
+    group = "software.amazon.smithy"
+    version = libraryVersion
+
     tasks.withType<Javadoc> {
         (options as StandardJavadocDocletOptions).apply {
             addStringOption("Xdoclint:-html", "-quiet")

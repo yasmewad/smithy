@@ -3,6 +3,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
+
 description = "This module provides the implementation of protocol traits for Smithy."
 
 extra["displayName"] = "Smithy :: Protocol Traits"

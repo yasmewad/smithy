@@ -13,8 +13,12 @@
  * permissions and limitations under the License.
  */
 
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
+
 description = "This module contains utility classes and interfaces for Smithy."
 
 extra["displayName"] = "Smithy :: Utilities"
 extra["moduleName"] = "software.amazon.smithy.utils"
-

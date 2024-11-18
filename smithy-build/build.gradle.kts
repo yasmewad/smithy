@@ -12,9 +12,13 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 
 description = "This module is a library used to validate Smithy models, create filtered " +
-        "projections of a model, and generate build artifacts."
+    "projections of a model, and generate build artifacts."
 
 extra["displayName"] = "Smithy :: Build"
 extra["moduleName"] = "software.amazon.smithy.build"

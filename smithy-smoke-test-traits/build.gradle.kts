@@ -13,6 +13,11 @@
  * permissions and limitations under the License.
  */
 
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
+
 description = "Defines smoke test traits."
 
 extra["displayName"] = "Smithy :: Smoke Test Traits"

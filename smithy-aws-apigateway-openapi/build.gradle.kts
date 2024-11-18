@@ -12,9 +12,12 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
-
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 description = "This module provides support for converting the Amazon API Gateway " +
-        "Smithy traits when converting a Smithy model to OpenAPI3."
+    "Smithy traits when converting a Smithy model to OpenAPI3."
 
 extra["displayName"] = "Smithy :: Amazon API Gateway OpenAPI Support"
 extra["moduleName"] = "software.amazon.smithy.aws.apigateway.openapi"

@@ -12,6 +12,10 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 
 description = "This module provides Smithy traits and validators that are used by most AWS services."
 

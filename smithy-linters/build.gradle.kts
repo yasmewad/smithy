@@ -12,9 +12,13 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 
 description = "This module provides support for customizable linters declared in the " +
-        "metadata section of a Smithy model."
+    "metadata section of a Smithy model."
 
 extra["displayName"] = "Smithy :: Linters"
 extra["moduleName"] = "software.amazon.smithy.linters"

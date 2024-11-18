@@ -12,6 +12,10 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 
 description = "Defines protocol test traits."
 

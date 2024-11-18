@@ -12,9 +12,13 @@
  * express or implied. See the License for the specific language governing
  * permissions and limitations under the License.
  */
+plugins {
+    id("smithy.java-conventions")
+    id("smithy.test-conventions")
+}
 
 description = "This module detects differences between two Smithy models, identifying " +
-        "changes that are safe and changes that are backward incompatible."
+    "changes that are safe and changes that are backward incompatible."
 
 extra["displayName"] = "Smithy :: Diff"
 extra["moduleName"] = "software.amazon.smithy.diff"
