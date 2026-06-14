@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "smithy-authoring",
+  "version": "0.1.0",
+  "description": "Guided Smithy authoring and validation. Create Smithy IDL models (shapes, operations, services, enums), apply constraint traits, and write selector expressions; validate, diff, and select against models via the Smithy CLI.",
+  "author": {
+    "name": "Smithy",
+    "url": "https://smithy.io"
+  },
+  "homepage": "https://smithy.io",
+  "repository": "https://github.com/smithy-lang/smithy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "smithy",
+    "idl",
+    "api-modeling",
+    "agent-skills",
+    "validation"
+  ]
+}

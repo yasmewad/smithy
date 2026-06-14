@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "smithy-agent-skills",
+  "owner": {
+    "name": "Smithy",
+    "url": "https://smithy.io"
+  },
+  "plugins": [
+    {
+      "name": "smithy-authoring",
+      "source": "./smithy-agent-skills",
+      "description": "Guided Smithy IDL authoring and model validation skills: write valid Smithy shapes and operations, apply constraint traits, and query models with selectors. Validation, diff, and selection run via the Smithy CLI (smithy validate, smithy diff, smithy select).",
+      "license": "Apache-2.0"
+    }
+  ]
+}
