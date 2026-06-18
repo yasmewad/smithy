@@ -1,5 +1,131 @@
 # Smithy Changelog
 
+## 1.71.0 (2026-05-14)
+
+### Features
+
+- Added `aws.apigateway#resourcePolicy` trait and OpenAPI mapper
+  ([#3081](https://github.com/smithy-lang/smithy/pull/3081))
+- Added `aws.apigateway#minimumCompressionSize` trait and OpenAPI mapper
+  ([#3076](https://github.com/smithy-lang/smithy/pull/3076))
+- Added `aws.apigateway#gatewayResponses` trait and OpenAPI mapper with DANGER
+  validation for CORS conflicts
+  ([#3089](https://github.com/smithy-lang/smithy/pull/3089))
+- Added `aws.auth#cognitoUserPoolsScopes` trait for specifying OAuth scopes on
+  operations that use an Amazon Cognito User Pools authorizer.
+  ([#3109](https://github.com/smithy-lang/smithy/pull/3109))
+- Added `aws.apigateway#apiTlsPolicy` trait and OpenAPI mapper
+  ([#3083](https://github.com/smithy-lang/smithy/pull/3083))
+- Added `tlsConfig`, `responseTransferMode`, and `integrationTarget` sub-fields
+  to the `aws.apigateway#integration` trait
+  ([#3090](https://github.com/smithy-lang/smithy/pull/3090))
+- Added copy-on-write optimization for `toBuilder()` via
+  `BuilderRef.setBorrowed`
+  ([#3107](https://github.com/smithy-lang/smithy/pull/3107))
+- Fixed trait codegen to generate more specific return type for trait provider
+  ([#3087](https://github.com/smithy-lang/smithy/pull/3087))
+- Added `aws.apigateway#apiKeyRequired` trait and OpenAPI mapper
+  ([#3091](https://github.com/smithy-lang/smithy/pull/3091))
+- Added `aws.apigateway#endpointConfiguration` trait
+  ([#3088](https://github.com/smithy-lang/smithy/pull/3088))
+- Added `ipAddressType` field to the `aws.apigateway#endpointConfiguration`
+  trait and added an OpenAPI mapper that writes `vpcEndpointIds` and
+  `disableExecuteApiEndpoint` to the
+  `x-amazon-apigateway-endpoint-configuration` extension.
+  ([#3110](https://github.com/smithy-lang/smithy/pull/3110))
+- Optimized model scoping in JsonSchemaConverter by constructing through a
+  Model.Builder instead of filtering shapes.
+  ([#3111](https://github.com/smithy-lang/smithy/pull/3111))
+- Added a new protocol test for query operations with no output that can include
+  `ResponseMetadata`. No assertions are done but protocol test runners should be
+  able to handle the metadata without choking.
+  ([#3106](https://github.com/smithy-lang/smithy/pull/3106))
+
+### Bug Fixes
+
+- Fixed an issue where traits would lose their types, reverting to DynamicTrait,
+  when renaming shapes
+  ([#3086](https://github.com/smithy-lang/smithy/pull/3086))
+- Fixed selector parsing to properly handle extraneous BREAK_TOKENS (',', '\]',
+  ')') in a selector. This manifested in silently dropping contents in the comma
+  case ("structure, string" was effectively just "structure"). For the closing
+  brace/paren, the characters were silently ignored as seen in the additional
+  fixed tests. ([#3063](https://github.com/smithy-lang/smithy/pull/3063))
+- Fixed event stream test params encoding blobs in b64.
+  ([#3121](https://github.com/smithy-lang/smithy/pull/3121))
+- Fixed a bug in OpenAPI conversions where onErrorStatusConflict from
+  mappers/protocols wasn't being respected.
+  ([#3123](https://github.com/smithy-lang/smithy/pull/3123))
+- Fixed a Windows user PATH corruption in install.bat caused by setx silently
+  truncating values over 1024 characters
+  ([#3117](https://github.com/smithy-lang/smithy/pull/3117))
+- Fixed an issue where jsonName wasn't applied to examples in OpenAPI for
+  restJson1 ([#3108](https://github.com/smithy-lang/smithy/pull/3108))
+- Fixed trait-codegen failure when string literals contain dollar signs
+  ([#3096](https://github.com/smithy-lang/smithy/pull/3096))
+
+### Documentation
+
+- Fixed stale and mismatched AWS API Gateway reference link targets
+  ([#3077](https://github.com/smithy-lang/smithy/pull/3077))
+
+## 1.70.0 (2026-04-30)
+
+### Features
+
+- Add JSON Schema for smithy-build.json
+  ([#3062](https://github.com/smithy-lang/smithy/pull/3062))
+
+- Added three new shape type selectors
+
+  - `aggregateType` selects lists, structures, unions, and maps.
+  - `serviceType` selects services, resources, and operations.
+  - `dataType` selects aggregate types and simple types.
+    ([#3070](https://github.com/smithy-lang/smithy/pull/3070))
+
+- Adds a Bill of Materials (BOM) for all Smithy packagees
+  ([#3056](https://github.com/smithy-lang/smithy/pull/3056))
+
+- Add support for custom comparators for sorting IDL serialization output
+  ([#3058](https://github.com/smithy-lang/smithy/pull/3058))
+
+- Ignore JARs without a Smithy manifest to allow Smithy model packages to have
+  non-Smithy dependencies
+  ([#3055](https://github.com/smithy-lang/smithy/pull/3055))
+
+### Bug Fixes
+
+- Fix init failure on corrupted template cache
+  ([#3051](https://github.com/smithy-lang/smithy/pull/3051))
+- Fix CLI dependency cache for multiple configs building to the same directory
+  ([#3061](https://github.com/smithy-lang/smithy/pull/3061))
+- Fix trait/validator loading with discoverModels
+  ([#3049](https://github.com/smithy-lang/smithy/pull/3049))
+- Optimize chained :root selector evaluation by updating IntermediateAndSelector
+  to only push to input-independent selectors one time
+  ([#3054](https://github.com/smithy-lang/smithy/pull/3054))
+- Fix minor issues logged during builds
+  ([#3050](https://github.com/smithy-lang/smithy/pull/3050))
+- Fixed a bug in the formatter that was removing newlines escapes
+  ([#3068](https://github.com/smithy-lang/smithy/pull/3068))
+
+### Documentation
+
+- Updated the example retry strategy in client guidance and updated the initial
+  token method to take information about the operation.
+  ([#3000](https://github.com/smithy-lang/smithy/pull/3000))
+- Added docs for the endpointTests trait.
+  ([#3048](https://github.com/smithy-lang/smithy/pull/3048))
+
+### Other
+
+- Fixed some errors in event stream protocol tests.
+  ([#3069](https://github.com/smithy-lang/smithy/pull/3069))
+- Run container as non-root user
+  ([#2934](https://github.com/smithy-lang/smithy/pull/2934))
+- Ensures javadoc uses UTF-8 encoding
+  ([#3057](https://github.com/smithy-lang/smithy/pull/3057))
+
 ## 1.69.0 (2026-04-08)
 
 ### Features
@@ -4420,4 +4546,3 @@ components of the documentation will have changed.
   ([#162](https://github.com/awslabs/smithy/pull/162))
 - Allow model assembling from symlink model files / directory
   ([#163](https://github.com/awslabs/smithy/pull/163))
-
